@@ -300,8 +300,8 @@ func (s *Session) AccountLegendaryArmory() (res []*AccountLegendaryArmoryItem, e
 
 // AccountWvW is the accounts WvW information
 type AccountWvW struct {
-	Team  int `json:"team"`
-	Guild int `json:"guild"`
+	Team  int    `json:"team"`
+	Guild string `json:"guild"`
 }
 
 // AccountLegendaryArmory returns the items in the account's legendary armory

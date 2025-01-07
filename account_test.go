@@ -364,3 +364,15 @@ func TestAccountLegendaryArmory(t *testing.T) {
 		t.Errorf("AccountLegendaryArmory failed: '%s'", err)
 	}
 }
+
+func TestAccountWvW(t *testing.T) {
+	key := os.Getenv("APIKEY")
+	if key == "" {
+		t.Skip("Unable to test without APIkey")
+	}
+
+	api := New().WithAccessToken(key)
+	if _, err := api.AccountWvW(); err != nil {
+		t.Errorf("AccountWvW failed: '%s'", err)
+	}
+}

@@ -298,8 +298,20 @@ func (s *Session) AccountLegendaryArmory() (res []*AccountLegendaryArmoryItem, e
 	return
 }
 
+// AccountWvW is the accounts WvW information
+type AccountWvW struct {
+	Team  int `json:"team"`
+	Guild int `json:"guild"`
+}
+
+// AccountLegendaryArmory returns the items in the account's legendary armory
+func (s *Session) AccountWvW() (wvw AccountWvW, err error) {
+	err = s.getWithAuth("/v2/account/wvw", &wvw)
+	return
+}
+
 // WvW is the accounts WvW information
 type WvW struct {
 	TeamID int `json:"team_id"`
-	Rank   int    `json:"rank"`
+	Rank   int `json:"rank"`
 }

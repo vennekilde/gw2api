@@ -36,15 +36,12 @@ type Account struct {
 	DailyAP      int           `json:"daily_ap"`
 	MonthlyAP    int           `json:"monthly_ap"`
 	// Deprecated: Use WvW.Rank instead
-	WvWRank      int            `json:"wvw_rank"`
-	LastModified time.Time      `json:"last_modified"`
-	WvW          AccountWvWInfo `json:"wvw"`
-}
-
-// AccountWvWInfo is the accounts WvW information
-type AccountWvWInfo struct {
-	TeamID int `json:"team_id"`
-	Rank   int `json:"rank"`
+	WvWRank      int       `json:"wvw_rank"`
+	LastModified time.Time `json:"last_modified"`
+	WvW          struct {
+		TeamID int `json:"team_id"`
+		Rank   int `json:"rank"`
+	} `json:"wvw"`
 }
 
 // Account returns general account information
@@ -305,14 +302,14 @@ func (s *Session) AccountLegendaryArmory() (res []*AccountLegendaryArmoryItem, e
 	return
 }
 
-// AccountWvW is the accounts WvW information
-type AccountWvW struct {
+// AccountWvWInfo is the accounts WvW information
+type AccountWvWInfo struct {
 	Team  int    `json:"team"`
 	Guild string `json:"guild"`
 }
 
 // AccountLegendaryArmory returns the items in the account's legendary armory
-func (s *Session) AccountWvW() (wvw AccountWvW, err error) {
+func (s *Session) AccountWvW() (wvw AccountWvWInfo, err error) {
 	err = s.getWithAuth("/v2/account/wvw", &wvw)
 	return
 }

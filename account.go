@@ -35,9 +35,16 @@ type Account struct {
 	FractalLevel int           `json:"fractal_level"`
 	DailyAP      int           `json:"daily_ap"`
 	MonthlyAP    int           `json:"monthly_ap"`
-	WvWRank      int           `json:"wvw_rank"`
-	LastModified time.Time     `json:"last_modified"`
-	WvW          WvW           `json:"wvw"`
+	// Deprecated: Use WvW.Rank instead
+	WvWRank      int            `json:"wvw_rank"`
+	LastModified time.Time      `json:"last_modified"`
+	WvW          AccountWvWInfo `json:"wvw"`
+}
+
+// AccountWvWInfo is the accounts WvW information
+type AccountWvWInfo struct {
+	TeamID int `json:"team_id"`
+	Rank   int `json:"rank"`
 }
 
 // Account returns general account information
@@ -308,10 +315,4 @@ type AccountWvW struct {
 func (s *Session) AccountWvW() (wvw AccountWvW, err error) {
 	err = s.getWithAuth("/v2/account/wvw", &wvw)
 	return
-}
-
-// WvW is the accounts WvW information
-type WvW struct {
-	TeamID int `json:"team_id"`
-	Rank   int `json:"rank"`
 }

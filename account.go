@@ -308,7 +308,7 @@ type AccountWvWInfo struct {
 	Guild string `json:"guild"`
 }
 
-// AccountLegendaryArmory returns the items in the account's legendary armory
+// AccountWvW returns the accounts WvW information
 func (s *Session) AccountWvW() (wvw AccountWvWInfo, err error) {
 	err = s.getWithAuth("/v2/account/wvw", &wvw)
 	return
